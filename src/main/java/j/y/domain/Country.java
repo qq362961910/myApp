@@ -28,6 +28,10 @@ public class Country implements Serializable {
     @JoinColumn(unique = true)
     private Region region;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User creator;
+
     public Long getId() {
         return id;
     }
@@ -60,6 +64,19 @@ public class Country implements Serializable {
 
     public void setRegion(Region region) {
         this.region = region;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public Country creator(User creator) {
+        this.creator = creator;
+        return this;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
     }
 
     @Override

@@ -19,6 +19,7 @@
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="myApp.country.countryName">Country Name</span></th>
             <th><span jhiTranslate="myApp.country.region">Region</span></th>
+            <th><span jhiTranslate="myApp.country.creator">creator</span></th>
             <th></th>
             </tr>
             </thead>
@@ -31,6 +32,7 @@
                         <a [routerLink]="['../region-my-suffix', country.regionId  ]" >{{country.regionId}}</a>
                     </div>
                 </td>
+                <td>{{country.creatorId}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

@@ -1,12 +1,16 @@
 package j.y.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import j.y.domain.User;
+import j.y.security.SecurityUtils;
 import j.y.service.CountryService;
+import j.y.service.UserService;
 import j.y.web.rest.util.HeaderUtil;
 import j.y.service.dto.CountryDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +33,9 @@ public class CountryResource {
 
     private final CountryService countryService;
 
+    @Autowired
+    private UserService userService;
+
     public CountryResource(CountryService countryService) {
         this.countryService = countryService;
     }
@@ -47,6 +54,8 @@ public class CountryResource {
         if (countryDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new country cannot already have an ID")).body(null);
         }
+        Optional<User> userOptional = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin());
+        userOptional.ifPresent(user -> countryDTO.setCreatorId(user.getId()));
         CountryDTO result = countryService.save(countryDTO);
         return ResponseEntity.created(new URI("/api/countries/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

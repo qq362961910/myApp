@@ -33,6 +33,8 @@ spring:
         console:
             enabled: false
     jpa:
+        hibernate:
+          ddl-auto: update
         database-platform: io.github.jhipster.domain.util.FixedH2Dialect
         database: H2
         show-sql: true

@@ -17,6 +17,8 @@ public class CountryDTO implements Serializable {
 
     private Long regionId;
 
+    private Long creatorId;
+
     public Long getId() {
         return id;
     }
@@ -39,6 +41,14 @@ public class CountryDTO implements Serializable {
 
     public void setRegionId(Long regionId) {
         this.regionId = regionId;
+    }
+
+    public Long getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(Long creatorId) {
+        this.creatorId = creatorId;
     }
 
     @Override
