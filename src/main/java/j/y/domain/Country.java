@@ -24,8 +24,8 @@ public class Country implements Serializable {
     @Column(name = "country_name")
     private String countryName;
 
-    @OneToOne
-    @JoinColumn(unique = true)
+    @ManyToOne
+    @JoinColumn(name = "region_id", referencedColumnName = "id")
     private Region region;
 
     @ManyToOne
